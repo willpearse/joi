@@ -98,9 +98,10 @@ class Joi < Thor
     end
   end
 
-  desc "new_ssh USER PUBLIC_KEY", "Setup a USER's PUBLIC_KEY"
-  def new_ssh(user, public_key)
+  desc "new_ssh USER FULL_NAME PUBLIC_KEY", "Setup a USER's PUBLIC_KEY with their FULL_NAME"
+  def new_ssh(user, full_name, public_key)
     if Process.uid == 0
+      system "sudo adduser #{user} --disabled-password --gecos '#{full_name}'"
       system "sudo mkdir /home/#{user}/.ssh"
       system "sudo echo #{public_key} > /home/#{user}/.ssh/authorized_keys"
       system "sudo chmod 700 /home/#{user}/.ssh/"
