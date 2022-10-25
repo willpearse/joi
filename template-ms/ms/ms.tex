@@ -1,0 +1,72 @@
+\documentclass[12pt]{report}
+\usepackage[utf8]{inputenc}
+\renewcommand\thesection{\arabic{section}}
+\usepackage[parfill]{parskip}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{units}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{nth}
+\usepackage{siunitx}
+\usepackage{subcaption}
+\usepackage[left=.75in,right=.75in,top=.75in,bottom=.75in]{geometry}
+\newcolumntype{@}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+  #1\ignorespaces
+}
+\usepackage{lineno} \linenumbers
+\usepackage[doublespacing]{setspace}
+
+\usepackage[style=apa,sorting=nyt,uniquelist=minyear,uniquename=false,maxcitenames=2,doi=false,url=false,isbn=false]{biblatex}
+\addbibresource{library.bib}
+
+\begin{document}
+
+\section*{Title page}
+\textbf{Article title}: . 
+
+\textbf{Authors:} William D. Pearse$^{1*}$
+
+$^1$ Department of Life Sciences, Imperial College London, Ascot SL5 7PY, United Kingdom. ORCID: 0000-0002-6241-3164.
+
+$^*$ To whom correspondence should be addressed: \url{will.pearse@imperial.ac.uk}.
+
+\textbf{Acknowledgments}: I am grateful to XXX anonymous reviewers, and the editorial board, for their help improving this manuscript. XXX provided insightful comments on the manuscript. The Pearse lab and I are funded by XXX.
+
+\newpage
+\section{Abstract}
+
+\newpage
+\section{Introduction}
+
+\newpage
+\section{Methods}
+
+\newpage
+\section{Results}
+
+\newpage
+\section{Discussion}
+
+\newpage
+\section{Figures}
+\begin{figure}
+  \center
+  \includegraphics[width=\textwidth]{figs-tables/XXX}
+  \caption{\textbf{\Soemthing}. More something}
+  \label{xxx}
+\end{figure}
+
+\clearpage
+\renewcommand\bibname{References}
+\printbibliography
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

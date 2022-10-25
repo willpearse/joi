@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{0301}{**********}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[top=1in, bottom=1in, left=1in,right=1in]{geometry}
+\usepackage{pgfgantt}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\setlength{\columnsep}{20pt}
+\usepackage{units}
+\usepackage{fancyhdr}
+\pagestyle{headings}
+\usepackage[labelfont=bf]{caption}
+\usepackage{color} \definecolor{dark-gray}{gray}{0.3}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,urlcolor=dark-gray,breaklinks,citecolor=black,linkcolor=black]{hyperref}
+\usepackage{savetrees}
+\usepackage{soul}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\usepackage{blindtext}
+\usepackage{lipsum}
+\usepackage{ntheorem}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{xspace}
+\setul{2pt}{1pt}
+\colorlet{ulgrey}{gray!80}
+\colorlet{ganttgrey}{gray!40}
+\colorlet{ulblue}{blue!60}
+\colorlet{ulred}{red!60}
+\colorlet{ulyellow}{yellow!80}
+\colorlet{ulgreen}{teal}
+
+% Shortcuts for code etc.
+\newcommand{\R}{\emph{R}\xspace}
+\newcommand{\betadiv}{$\beta$-diversity\xspace}
+\newcommand{\alphadiv}{$\alpha$-diversity\xspace}
+\newcommand{\eg}{\emph{e.g.}\xspace}
+\newcommand{\ie}{\emph{i.e.}\xspace}
+
+\newcommand{\WP}{\textbf{WP}\xspace}
+
+
+\usepackage{ragged2e}
+\usepackage[super]{nth}
+\usepackage{amsmath}
+
+\usepackage{sidecap}
+\usepackage{setspace}
+
+\newcommand{\greyblindtext}{\textcolor{gray}{\blindtext}}
+
+\usepackage{nicefrac}
+
+\usepackage[citestyle=numeric-comp,bibstyle=numeric,sorting=none,maxcitenames=1,maxbibnames=1,doi=false,url=false,isbn=false,giveninits=false,terseinits=true,uniquename=false,uniquelist=false,backend=biber]{biblatex}
+
+\renewbibmacro*{name:andothers}{% Based on name:andothers from biblatex.def
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \andothersdelim\bibstring[\emph]{andothers}}
+    {}}
+
+%Make 'and' an ampersand
+\renewcommand*{\finalnamedelim}{%
+\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+\addspace\&\space}
+%Remove 'in:'
+\renewbibmacro{in:}{}
+%Remove pp. on pages numbers
+\DeclareFieldFormat[article]{pages}{#1}%
+%Remove unwanted entries
+\AtEveryBibitem{%
+  \clearfield{day}%
+  \clearfield{month}%
+  \clearfield{endday}%
+  \clearfield{endmonth}%
+  \clearfield{month}%
+  \clearfield{url}%
+  \clearfield{URL}%
+  \clearfield{eprint}%
+  \clearfield{title}%
+  \clearfield{pages}%
+  \clearfield{volume}%
+  \clearfield{number}%
+}
+%Remove spaces between initials
+%Remove double quotes around titles
+\DeclareFieldFormat*{citetitle}{#1}
+\DeclareFieldFormat*{title}{#1}
+
+% Drop the square brackets
+\DeclareFieldFormat{labelnumberwidth}{#1}
+% Drop the new lines in the bibliography
+\defbibenvironment{bibliography}
+  {\noindent}
+  {\unspace}
+  {\printtext[labelnumberwidth]{%
+     \printfield{labelprefix}%
+     \textsuperscript{\printfield{labelnumber}}}%
+   %\addspace
+ }
+ \renewbibmacro*{finentry}{\finentry\addspace}%was \addspace %...and then \quad\quad

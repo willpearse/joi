@@ -72,12 +72,12 @@ class Joi < Thor
 
   desc "folder_size LOCATION", "Folder sizes at LOCATION (default current directory)"
   def folder_size(location="")
-    `du -h --max-depth=1`
+    puts `du -h --max-depth=1`
   end
 
   desc "disk_use", "How much space are you using?"
   def disk_use(location="")
-    `df`
+    puts `df`
   end
 
   desc "r_pkg_test FOLDER", "Build and test an R package in FOLDER"
@@ -88,10 +88,11 @@ class Joi < Thor
       old_pkgs.each {|x| File.delete x}
     end
     if Dir.exists? folder
+      system "Rscript -e \"library(roxygen2);roxygenize('#{folder}')\""
       system "R CMD build #{folder}"
       package = Dir["./#{folder}*.tar.gz"]
       if package.length > 0
-        system "R CMD check #{folder} --as-cran"
+        system "R CMD check #{package[0]} --as-cran"
       end
     else
       puts "No such folder #{folder} to build R package"
@@ -119,6 +120,16 @@ class Joi < Thor
     make_alias("lib_search", "jl", @@terminal_loader, @@joi_location)
     make_alias("gs_person", "jgp", @@terminal_loader, @@joi_location)
     make_alias("gs_search", "jg", @@terminal_loader, @@joi_location)
+  end
+
+  desc "new_ms NAME", "Make template for new manuscript with folder NAME"
+  def new_ms(name)
+    FileUtils.cp_r("/home/will/Code/joi/template-ms/", name)
+  end
+
+  desc "new_grant NAME", "Make template for new grant with folder NAME"
+  def new_grant(name)
+    FileUtils.cp_r("/home/will/Code/joi/template-grant/", name)
   end
 end
 
