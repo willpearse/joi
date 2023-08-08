@@ -119,6 +119,20 @@ class Joi < Thor
       puts "Make me a sandwich (https://xkcd.com/149/)"
     end
   end
+
+  desc "del_usercrib USER", "A reminder of how to delete users but never to be run"
+  def del_user_crib(user)
+    if Process.uid == 0
+      puts "sudo tar -cf /media/kaiser/old-users/USER.tar USER"
+      puts "sudo deluser USER"
+      puts "sudo rm -rf USER/"
+      puts "Decide what to do about kaiser and bear files"
+      puts "So help me god, Will, if you just copy-paste the above"
+      puts "...you deserve everything that will happen to you..."
+    else
+      puts "Make me a sandwich (https://xkcd.com/149/)"
+    end
+  end
   
   desc "bash_aliases", "Set BASH aliases for useful Joi commands"
   def bash_aliases()
