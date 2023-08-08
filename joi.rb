@@ -109,6 +109,12 @@ class Joi < Thor
       system "sudo chmod 644 /home/#{user}/.ssh/authorized_keys"
       system "sudo chown #{user}:#{user} /home/#{user}/.ssh/"
       system "sudo chown #{user}:#{user} /home/#{user}/.ssh/authorized_keys"
+      system "sudo mkdir /media/bear/#{user}"
+      system "sudo mkdir /media/kaiser/#{user}"
+      system "sudo chown #{user}:#{user} /media/bear/#{user}"
+      system "sudo chown #{user}:#{user} /media/kaiser/#{user}"
+      system "sudo ln -s /media/bear/#{user}/ /home/#{user}/bear"
+      system "sudo ln -s /media/kaiser/#{user}/ /home/#{user}/kaiser"
     else
       puts "Make me a sandwich (https://xkcd.com/149/)"
     end
