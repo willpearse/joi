@@ -40,7 +40,7 @@ class Joi < Thor
       file = tmp_file
     end
     file = File.expand_path(file)
-    unless File.exists?(file)
+    unless File.exist?(file)
       puts "#{file} does not exist"
       exit
     end
@@ -49,7 +49,7 @@ class Joi < Thor
       puts "Title not given and cannot be detected from PDF meta-data"
       exit
     end
-    unless Dir.exists?("/home/will/Papers/#{location}")
+    unless Dir.exist?("/home/will/Papers/#{location}")
       puts "/home/will/Papers/#{location} does not exist"
       exit
     end
@@ -87,7 +87,7 @@ class Joi < Thor
       puts "Deleting: #{old_pkgs}"
       old_pkgs.each {|x| File.delete x}
     end
-    if Dir.exists? folder
+    if Dir.exist? folder
       system "Rscript -e \"library(roxygen2);roxygenize('#{folder}')\""
       system "R CMD build #{folder}"
       package = Dir["./#{folder}*.tar.gz"]
@@ -151,6 +151,12 @@ class Joi < Thor
   def new_grant(name)
     FileUtils.cp_r("/home/will/Code/joi/template-grant/", name)
   end
+
+  desc "ponysay TEXT", "Make a rainbow pony say NAME"
+  def ponysay(text)
+    `cowsay -f unipony-smaller \"#{text}\"'`#` | lolcat`
+  end
+
 end
 
 Joi.start(ARGV)
