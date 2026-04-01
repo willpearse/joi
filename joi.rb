@@ -154,7 +154,12 @@ class Joi < Thor
 
   desc "ponysay TEXT", "Make a rainbow pony say NAME"
   def ponysay(text)
-    `cowsay -f unipony-smaller \"#{text}\"'`#` | lolcat`
+    puts `cowsay -f unipony-smaller \"#{text}\"`
+  end
+
+  desc "llm TEXT", "Run something by a local LLM"
+  def llm(text)
+    job = fork {|x| exec "/home/will/Code/llama.cpp/llama-cli -m /home/will/Code/llama-1b.gguf -p \"#{text}\" -no-cnv -n 256 2>/dev/null"}
   end
 
 end
